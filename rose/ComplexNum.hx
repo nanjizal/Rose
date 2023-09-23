@@ -946,3 +946,59 @@ abstract ComplexNum( ComplexNum_ ) from ComplexNum_ to ComplexNum_ {
       return new ComplexNum({ r: polar.magnitude * Math.cos( polar.phase ), i: polar.magnitude * Math.sin( polar.phase } );
     }
 }
+inline 
+function sin( c: ComplexNum ): ComplexNum {
+   return if( c.isReal() == true ){
+         new ComplexNum({ x: Math.sin( c.real ), y: 0 });
+   } else { 
+         new ComplexNum({ x: Math.sin(c.real) * Hyperbolic.cosh(c.i)
+                     , y: Math.cos(c.real) * Hyperbolic.sinh(c.i) });
+   }
+}
+inline
+function cos( c: ComplexNum ):ComplexNum {
+    return if( c.isReal() == true ){
+        new ComplexNum({ r: Math.cos( c.real ), i: 0 } );
+    } else {
+        new ComplexNum({ r: Math.cos(c.real) * Hyperbolic.cosh(c.i)
+                       , i: -Math.sin(c.real) * Hyperbolic.sinh(c.i) });
+    }
+}
+inline 
+function tan( c: ComplexNum ): ComplexNum {
+    return if( c.isReal() == true ){
+        new ComplexNum({ r: Math.tan( c.real ), i: 0 });
+    } else {
+        return sin(c)/cos(c);
+    }
+}
+inline
+function sinh( c: ComplexNum ): ComplexNum {
+    return if( c.isReal() == true ){
+        new ComplexNum({ r: Hyperbolic.sinh( c.real ), i: 0 });
+    } else { 
+        new ComplexNum({ r: Hyperbolic.sinh(c.real) * Math.cos(c.i)
+                       , i: Hyperbolic.cosh(c.real) * Math.sin(c.i) });
+    }
+}
+inline
+function cosh( c: ComplexNum ): ComplexNum {
+    return if( c.isReal() == true ){
+        new ComplexNum({ r: Hyperbolic.cosh( c.real ), i: 0 });
+    } else { 
+        new ComplexNum({ r: Hyperbolic.cosh(c.real) * Math.cos(c.i)
+                       , y: Hyperbolic.sinh(c.real) * Math.sin(c.i) });
+    }
+}
+inline
+function tanh( c: ComplexNum ): ComplexNum {
+    return if( c.isReal() == true ){
+        new ComplexNum({ x: Hyperbolic.tanh( c.real ), y: 0 });
+    } else { 
+        var hx = Hyperbolic.tanh( c.real );
+        var ty = Math.tan( c.i );
+        var n = new ComplexNum({ x: hx, y: ty });
+        var d = new ComplexNum({ x: 1,  y: hx * ty });
+        n/d;
+    }
+}
