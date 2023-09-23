@@ -1,6 +1,8 @@
 package rose;
 import rose.PiTo2pi;
 import rose.TauRadian;
+import rose.ComplexNum;
+
 @:initStuct
 class Polar_ {
     public var radius: Float;
@@ -57,7 +59,19 @@ abstract Polar( Polar_ ) from Polar_ to Polar_ {
     function fromCartesian( x: Number, y: Number ): Polar {
 		this = new Polar( Math.sqrt( (x * x) + (y * y)
                         , ( x < 0 )? ( Math.atan( y / x) - Math.PI ): ( Math.atan( y / x ) );
-	}
+    }
+    @:to
+	public inline
+    function toComplexNum(): ComplexNum {
+        //var no: ComplexNo = this.abstract;
+        //return no;
+        return ComplexNum.fromPolar( this.abstract );
+    }
+    @:from
+    public static inline
+    function fromComplex( no: ComplexNum ): Polar {
+        return no.toPolar();
+    }
     @:keep
     public inline
     function toString(): String {
