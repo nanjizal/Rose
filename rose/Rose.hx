@@ -4,6 +4,7 @@ import fracs.Fraction;
 /**
  32 Compass Rose names
 **/
+@:transitive
 @:forward
 enum abstract Rose32( Int ) to Int from Int {
     var N = 0;
