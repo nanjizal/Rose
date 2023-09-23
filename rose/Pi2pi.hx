@@ -2,7 +2,7 @@ package rose;
 import rose.TauRadian;
 import fracs.Fraction;
 @:transitive
-@forward
+@:forward
 abstract Pi2pi( Float ) to Float {
     inline // private can't create directly
     function new( f: Float ){
