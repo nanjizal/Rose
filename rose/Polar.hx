@@ -21,7 +21,7 @@ abstract Polar( Polar_ ) from Polar_ to Polar_ {
             t = theta-Math.PI;
             r = -r;
         }
-        this = { radius: r, theta: (t: PiTo2pi ) };
+        this = { radius: r, theta: tauLimit( t, 0 ) };
     }
     public var phase( get, set ): Float;
     inline function get_phase(): Float {
